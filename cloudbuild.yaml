@@ -7,7 +7,7 @@ steps:
 
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: gcloud
-  args: ['run', 'deploy', 'flask-app', '--image', 'gcr.io/$PROJECT_ID/flask-app', '--region', 'your-region', '--platform', 'managed']
+  args: ['run', 'deploy', 'flask-app', '--image', 'gcr.io/$PROJECT_ID/flask-app', '--region', 'africa-south1', '--platform', 'managed']
 
 options:
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
