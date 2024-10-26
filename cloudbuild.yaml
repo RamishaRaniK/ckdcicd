@@ -6,71 +6,8 @@ steps:
   args: ['push', 'gcr.io/$PROJECT_ID/flask-app']
 
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-  entrypoint: bash
-  args:
-    - '-c'
-    - |
-      # List of available regions
-      AVAILABLE_REGIONS=(
-        "africa-south1"
-        "asia-east1"
-        "asia-east2"
-        "asia-northeast1"
-        "asia-northeast2"
-        "asia-northeast3"
-        "asia-south1"
-        "asia-south2"
-        "asia-southeast1"
-        "asia-southeast2"
-        "australia-southeast1"
-        "australia-southeast2"
-        "europe-central2"
-        "europe-north1"
-        "europe-southwest1"
-        "europe-west1"
-        "europe-west2"
-        "europe-west3"
-        "europe-west4"
-        "europe-west6"
-        "europe-west8"
-        "europe-west9"
-        "europe-west10"
-        "europe-west12"
-        "me-central1"
-        "me-central2"
-        "me-west1"
-        "northamerica-northeast1"
-        "northamerica-northeast2"
-        "southamerica-east1"
-        "southamerica-west1"
-        "us-central1"
-        "us-east1"
-        "us-east4"
-        "us-east5"
-        "us-south1"
-        "us-west1"
-        "us-west2"
-        "us-west3"
-        "us-west4"
-      )
-
-      # Function to find the first available region
-      function get_available_region() {
-        for REGION in "${AVAILABLE_REGIONS[@]}"; do
-          if gcloud run regions describe "$REGION" &> /dev/null; then
-            echo "$REGION"
-            return 0
-          fi
-        done
-        echo "No available regions found" >&2
-        exit 1
-      }
-
-      # Get an available region
-      REGION=$(get_available_region)
-
-      # Deploy to the available region
-      gcloud run deploy flask-app --image "gcr.io/$PROJECT_ID/flask-app" --region "$REGION" --platform managed
+  entrypoint: gcloud
+  args: ['run', 'deploy', 'flask-app', '--image', 'gcr.io/$PROJECT_ID/flask-app', '--region', '--platform', 'managed']
 
 options:
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
