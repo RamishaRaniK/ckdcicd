@@ -37,5 +37,5 @@ def predict():
     except Exception as e:
         return jsonify({'error': str(e)})
 if __name__ == '__main__':
-    #port = int(os.environ.get('PORT', 8080))  # Default to 5000 if PORT is not set
-    app.run(host='0.0.0.0', port=5000)  # Bind to 0.0.0.0
+    port = int(os.environ.get('PORT', 8080))  # Default to 5000 if PORT is not set
+    app.run(host='0.0.0.0', port=port)  # Bind to 0.0.0.0
